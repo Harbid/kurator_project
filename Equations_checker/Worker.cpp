@@ -49,6 +49,7 @@ namespace eq_checker
                 ++eq_count;
             }
         }
+
         return 0;
     }
 
@@ -77,6 +78,7 @@ namespace eq_checker
         input.close();
         return 0;
     }
+
     std::vector<std::vector<int> > Worker::get_current_system(const std::vector<int> &system_mask)
     {
         std::vector<std::vector<int> > current_system;
@@ -87,7 +89,7 @@ namespace eq_checker
                 current_system.push_back(all_equations_masks[i]);
             }
         }
-#ifdef DEBUG_PRINT
+#ifdef HRB_GET_CURRENT_SYSTEM_DEBUG
         d_logger.print(current_system);
 #endif
         return current_system;
@@ -200,9 +202,14 @@ namespace eq_checker
         }
         int succeeded_systems = 0;
         int failed_systems = 0;
-        //while(mask != final_mask)
-        for(int i = 0; i < 9; ++i)
+        bool finished = false;
+        while(mask != final_mask || !finished)
+        //for(int i = 0; i < 9; ++i)
         {
+            if(mask == final_mask)
+            {
+                finished = true;
+            }
             std::vector<std::vector<int> > current_system = get_current_system(mask);
             std::vector<int> current_values = generate_values(current_system);
             std::vector<int> solved_values = solve_system(current_system, current_values);

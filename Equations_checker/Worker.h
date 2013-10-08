@@ -5,6 +5,7 @@
 //#define HRB_CHECK_DEBUG
 //#define HRB_SOLVE_SYSTEM_DEBUG
 //#define HRB_GET_EQ_FROM_FILE_DEBUG
+//#define HRB_GET_CURRENT_SYSTEM_DEBUG
 #define COUT_OFFSET 2
 
 extern Debug_logger d_logger;
